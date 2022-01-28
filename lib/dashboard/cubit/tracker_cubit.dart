@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/services.dart';
 import 'package:meta/meta.dart';
 
@@ -9,8 +10,10 @@ import '../model/tracker.dart';
 part 'tracker_state.dart';
 
 class TrackerCubit extends Cubit<TrackerState> {
-  TrackerCubit() : super(TrackerInitial());
-  Future<void> getData() async {
+  TrackerCubit() : super(TrackerInitial()) {
+    getData();
+  }
+  void getData() async {
     emit(TrackerLoading());
     try {
       List<dynamic> data = await rootBundle
