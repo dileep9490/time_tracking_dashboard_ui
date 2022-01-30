@@ -8,6 +8,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Time Tracking Dashboard',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(fontFamily: 'Rubik'),
       home: const DashBoradPage(),
     );
