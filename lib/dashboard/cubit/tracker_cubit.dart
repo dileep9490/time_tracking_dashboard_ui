@@ -21,6 +21,7 @@ class TrackerCubit extends Cubit<TrackerState> {
           .then((value) => jsonDecode(value));
 
       List<Tracker> trackedData = data.map((e) => Tracker.fromMap(e)).toList();
+      
       emit(TrackerLoaded(trackedData: trackedData));
     } catch (e) {
       emit(TrackerError());

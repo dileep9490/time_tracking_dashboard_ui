@@ -1,11 +1,12 @@
 part of 'timeframe_cubit.dart';
 
-enum TimeFrame { daily, weekly, monthly }
+// ignore: must_be_immutable
+class TimeFrameState extends Equatable {
+  int index;
+  TimeFrameState({
+    required this.index,
+  });
 
-class TimeframeState extends Equatable {
-  final TimeFrame state;
-
-  TimeframeState(this.state);
   @override
-  List<Object?> get props => [state];
+  List<Object?> get props => [index];
 }
