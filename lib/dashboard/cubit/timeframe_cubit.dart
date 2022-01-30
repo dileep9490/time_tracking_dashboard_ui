@@ -3,15 +3,11 @@ import 'package:equatable/equatable.dart';
 
 part 'timeframe_state.dart';
 
-class TimeframeCubit extends Cubit<TimeframeState> {
-  TimeframeCubit() : super(TimeframeState(TimeFrame.daily));
-
-  int _index = 0;
+class TimeFrameCubit extends Cubit<TimeFrameState> {
+  TimeFrameCubit() : super(TimeFrameState(index: 0));
 
   void changeTimeFrame(int index) {
-    TimeframeState(TimeFrame.values[index]);
-    _index = index;
+    state.index = index;
+    emit(TimeFrameState(index: state.index));
   }
-
-  get timeFrameindex => _index;
 }

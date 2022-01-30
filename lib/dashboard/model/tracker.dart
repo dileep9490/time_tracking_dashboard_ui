@@ -2,23 +2,14 @@ import 'dart:convert';
 
 class Tracker {
   final String title;
-  final TimeFrame daily;
-  final TimeFrame weekly;
-  final TimeFrame monthly;
+  List<TimeFrame> timeframes = [];
 
   Tracker(
       {required this.title,
-      required this.daily,
-      required this.weekly,
-      required this.monthly});
-
-  Map<String, dynamic> toMap() {
-    return {
-      'title': title,
-      'daily': daily.toMap(),
-      'weekly': weekly.toMap(),
-      'monthly': monthly.toMap(),
-    };
+      required TimeFrame daily,
+      required TimeFrame weekly,
+      required TimeFrame monthly}) {
+    timeframes = [daily, weekly, monthly];
   }
 
   factory Tracker.fromMap(Map<String, dynamic> map) {
@@ -29,8 +20,6 @@ class Tracker {
       monthly: TimeFrame.fromMap(map['timeframes']['monthly']),
     );
   }
-
-  String toJson() => json.encode(toMap());
 
   factory Tracker.fromJson(String source) =>
       Tracker.fromMap(json.decode(source));

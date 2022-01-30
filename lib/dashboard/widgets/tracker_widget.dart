@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:time_tracking_dashboard_ui/colors.dart';
+
 import 'package:time_tracking_dashboard_ui/dashboard/model/tracker.dart';
 
 class TrackerCard extends StatelessWidget {
@@ -8,12 +9,26 @@ class TrackerCard extends StatelessWidget {
       {Key? key,
       required this.tracker,
       required this.svgPath,
-      required this.backgroundcolor})
+      required this.backgroundcolor,
+      required this.index})
       : super(key: key);
 
   final Tracker tracker;
   final String svgPath;
   final Color backgroundcolor;
+  final int index;
+
+  String previousText(int index) {
+    switch (index) {
+      case (0):
+        return "yesterday - ";
+      case (1):
+        return "Last Week - ";
+      case (2):
+      default:
+        return "Last Month -";
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +75,7 @@ class TrackerCard extends StatelessWidget {
                             fontSize: 28),
                       ),
                       const Padding(padding: EdgeInsets.all(8)),
-                      Text('${tracker.daily.current.toString()}hrs',
+                      Text('${tracker.timeframes[index].current.toString()}hrs',
                           style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w300,
@@ -83,7 +98,7 @@ class TrackerCard extends StatelessWidget {
                         padding: EdgeInsets.all(20),
                       ),
                       Text(
-                        "Last Week - ${tracker.daily.previous.toString()}hrs",
+                        "${previousText(index)}${tracker.timeframes[index].previous.toString()}hrs",
                         style: const TextStyle(color: paleBlue, fontSize: 16),
                       )
                     ],

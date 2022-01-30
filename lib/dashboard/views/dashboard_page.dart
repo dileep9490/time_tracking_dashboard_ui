@@ -22,7 +22,7 @@ class DashBoradPage extends StatelessWidget {
               create: (context) => TrackerCubit(),
             ),
             BlocProvider(
-              create: (context) => TimeframeCubit(),
+              create: (context) => TimeFrameCubit(),
             ),
           ],
           child: const _DashBoardView(),
@@ -32,8 +32,19 @@ class DashBoradPage extends StatelessWidget {
   }
 }
 
-class _DashBoardView extends StatelessWidget {
+class _DashBoardView extends StatefulWidget {
   const _DashBoardView({Key? key}) : super(key: key);
+
+  @override
+  State<_DashBoardView> createState() => _DashBoardViewState();
+}
+
+class _DashBoardViewState extends State<_DashBoardView> {
+  onPressed(int index) {
+    setState(() {
+      context.read<TimeFrameCubit>().changeTimeFrame(index);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,35 +60,50 @@ class _DashBoardView extends StatelessWidget {
           );
         } else if (state is TrackerLoaded) {
           List<Tracker> reqlist = state.trackedData;
+          int index = context.read<TimeFrameCubit>().state.index;
+          
           return SingleChildScrollView(
             child: Column(
               children: [
-                const HeaderWidget(),
+                HeaderWidget(
+                  onPressed: onPressed,index: index,
+                ),
                 TrackerCard(
                   svgPath: "assets/images/icon-work.svg",
                   tracker: reqlist[0],
                   backgroundcolor: workColor,
+                  index: index,
                 ),
                 TrackerCard(
-                    tracker: reqlist[1],
-                    svgPath: "assets/images/icon-play.svg",
-                    backgroundcolor: playColor),
+                  tracker: reqlist[1],
+                  svgPath: "assets/images/icon-play.svg",
+                  backgroundcolor: playColor,
+                  index: index,
+                ),
                 TrackerCard(
-                    tracker: reqlist[2],
-                    svgPath: "assets/images/icon-study.svg",
-                    backgroundcolor: studyColor),
+                  tracker: reqlist[2],
+                  svgPath: "assets/images/icon-study.svg",
+                  backgroundcolor: studyColor,
+                  index: index,
+                ),
                 TrackerCard(
-                    tracker: reqlist[3],
-                    svgPath: "assets/images/icon-exercise.svg",
-                    backgroundcolor: exerciseColor),
+                  tracker: reqlist[3],
+                  svgPath: "assets/images/icon-exercise.svg",
+                  backgroundcolor: exerciseColor,
+                  index: index,
+                ),
                 TrackerCard(
-                    tracker: reqlist[4],
-                    svgPath: "assets/images/icon-social.svg",
-                    backgroundcolor: socialColor),
+                  tracker: reqlist[4],
+                  svgPath: "assets/images/icon-social.svg",
+                  backgroundcolor: socialColor,
+                  index: index,
+                ),
                 TrackerCard(
-                    tracker: reqlist[5],
-                    svgPath: "assets/images/icon-self-care.svg",
-                    backgroundcolor: selfcareColor)
+                  tracker: reqlist[5],
+                  svgPath: "assets/images/icon-self-care.svg",
+                  backgroundcolor: selfcareColor,
+                  index: index,
+                )
               ],
             ),
           );

@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:time_tracking_dashboard_ui/colors.dart';
 
+// ignore: must_be_immutable
 class HeaderWidget extends StatelessWidget {
-  const HeaderWidget({Key? key}) : super(key: key);
-  
+  Function onPressed;
+  int index;
+  HeaderWidget({Key? key, required this.onPressed, required this.index})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,39 +26,43 @@ class HeaderWidget extends StatelessWidget {
             children: [
               TextButton(
                 onPressed: () {
-                  //TODO:Implement
+                  onPressed(0);
                 },
-                child: const Text(
+                child: Text(
                   'Daily',
                   style: TextStyle(
-                      color: paleBlue,
+                      color: index == 0 ? Colors.white : paleBlue,
                       fontSize: 18,
                       fontWeight: FontWeight.w400),
                 ),
+                style: const ButtonStyle(splashFactory: NoSplash.splashFactory),
               ),
               TextButton(
                 onPressed: () {
-                  //TODO:implement
+                  onPressed(1);
                 },
-                child: const Text(
+                child: Text(
                   'Weekly',
                   style: TextStyle(
-                      color: paleBlue,
+                      color: index == 1 ? Colors.white : paleBlue,
                       fontSize: 18,
                       fontWeight: FontWeight.w400),
                 ),
+                style: const ButtonStyle(splashFactory: NoSplash.splashFactory),
               ),
               TextButton(
-                  onPressed: () {
-                    //TODO:implement
-                  },
-                  child: const Text(
-                    'Monthly',
-                    style: TextStyle(
-                        color: paleBlue,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w400),
-                  ))
+                onPressed: () {
+                  onPressed(2);
+                },
+                child: Text(
+                  'Monthly',
+                  style: TextStyle(
+                      color: index == 2 ? Colors.white : paleBlue,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w400),
+                ),
+                style: const ButtonStyle(splashFactory: NoSplash.splashFactory),
+              )
             ],
           ),
         ),
