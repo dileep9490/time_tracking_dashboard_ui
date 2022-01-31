@@ -14,8 +14,8 @@ Users should be able to:
 - See hover states for all interactive elements on the page
 - Switch between viewing Daily, Weekly, and Monthly stats
 - to create UI like this
-  - ![](design\mobile-design.jpg)
+   ![](design/mobile-design.jpg)
 
-### Screenshot
+### Screenshot of my App
 
 ![](design/Screenshot.png)
